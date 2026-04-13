@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Tasbeeh Pro</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Amiri&display=swap" rel="stylesheet">
+
+<style>
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #4f46e5, #06b6d4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Card */
+.container {
+    position: relative;
+    background: #0f172a;
+    padding: 25px;
+    border-radius: 20px;
+    width: 300px;
+    text-align: center;
+    color: white;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+}
+
+/* Back button */
+.back-btn {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background: transparent;
+    border: none;
+    color: #94a3b8;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+/* Arabic text */
+.zikr {
+    font-family: 'Amiri', serif;
+    font-size: 22px;
+    margin-bottom: 10px;
+}
+
+/* Counter */
+.counter-box {
+    background: black;
+    border-radius: 10px;
+    padding: 12px;
+    margin: 15px 0;
+    box-shadow: inset 0 0 10px rgba(0,255,200,0.3);
+}
+
+.counter {
+    font-size: 40px;
+    color: #00ffd5;
+    font-weight: bold;
+}
+
+/* Tap button */
+.tap-btn {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    border: none;
+    background: radial-gradient(circle, #22c55e, #15803d);
+    color: white;
+    font-weight: bold;
+    box-shadow: 0 0 20px rgba(34,197,94,0.6);
+    margin: 15px auto;
+}
+
+.tap-btn:active {
+    transform: scale(0.92);
+}
+
+/* Controls */
+.controls button {
+    margin: 5px;
+    padding: 8px 12px;
+    border-radius: 8px;
+    border: none;
+    font-size: 12px;
+}
+
+.reset { background: #ef4444; color: white; }
+.next { background: #3b82f6; color: white; }
+
+.quote {
+    font-size: 12px;
+    color: #94a3b8;
+    margin-top: 10px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <button class="back-btn" onclick="goBack()">←</button>
+
+    <div id="zikrText" class="zikr">SubhanAllah</div>
+
+    <div class="counter-box">
+        <div id="count" class="counter">0</div>
+    </div>
+
+    <button class="tap-btn" onclick="increment()">TAP</button>
+
+    <div class="controls">
+        <button class="reset" onclick="reset()">Reset</button>
+        <button class="next" onclick="nextZikr()">Next</button>
+    </div>
+
+    <p class="quote">“Remembrance of Allah brings peace to the heart.”</p>
+</div>
+
+<script>
+let count = localStorage.getItem("count") || 0;
+let zikrIndex = localStorage.getItem("zikrIndex") || 0;
+
+const azkar = [
+    "SubhanAllah",
+    "Alhamdulillah",
+    "Allahu Akbar",
+    "La ilaha illa Allah"
+];
+
+document.getElementById("count").innerText = count;
+document.getElementById("zikrText").innerText = azkar[zikrIndex];
+
+// Sound
+const clickSound = new Audio("https://www.soundjay.com/buttons/sounds/button-16.mp3");
+
+function increment() {
+    count++;
+    document.getElementById("count").innerText = count;
+
+    // Save
+    localStorage.setItem("count", count);
+
+    // Sound
+    clickSound.play();
+
+    // Vibration
+    if (navigator.vibrate) {
+        navigator.vibrate(50);
+    }
+}
+
+function reset() {
+    count = 0;
+    document.getElementById("count").innerText = count;
+    localStorage.setItem("count", count);
+}
+
+function nextZikr() {
+    zikrIndex = (parseInt(zikrIndex) + 1) % azkar.length;
+    document.getElementById("zikrText").innerText = azkar[zikrIndex];
+
+    localStorage.setItem("zikrIndex", zikrIndex);
+}
+
+function goBack() {
+    window.location.href = "index.html";
+}
+</script>
+
+</body>
+</html>

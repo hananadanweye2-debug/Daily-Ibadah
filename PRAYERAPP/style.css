@@ -1,0 +1,384 @@
+body {
+    font-family: 'Poppins', Arial, sans-serif;
+    background: #f1f5f9;
+    text-align: center;
+    margin: 0;
+}
+
+/* 👇 THIS is the correct container fix */
+.container {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* center vertically */
+    align-items: center;
+}
+
+h1 {
+  margin: 5px 0 0 0; /* 👈 less space above */
+}
+
+h2 {
+  margin: 0 0 5px 0; /* 👈 tighter under title */
+}
+
+* {
+  box-sizing: border-box; /* 👈 VERY IMPORTANT */
+}
+
+.card {
+  background: white;
+  padding: 15px;
+  margin: 10px 0;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.highlight {
+  background: #2ecc71;
+  color: white;
+  text-align: center;
+}
+
+input, select {
+  width: 100%;
+  padding: 10px;
+  margin-top: 8px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+button {
+  margin-top: 8px;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  background: #3498db;
+  color: white;
+  cursor: pointer;
+  width: 100%;
+}
+
+button.secondary {
+  background: #95a5a6;
+}
+
+button:hover {
+  opacity: 0.9;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+.card p {
+  margin: 5px 0;
+}
+/* Navbar */
+.navbar {
+  position: fixed;
+  bottom: 0;
+  width: 100px;
+  max-width: 420px;
+  left: 50%;
+  display: flex;
+  justify-content: space-around;
+  background: #ffffff;
+  border-top: 1px solid #ddd;
+  padding: 10px 0;
+  
+}
+
+.navbar a {
+  text-decoration: none;
+  color: #333;
+  font-size: 14px;
+  text-align: center;
+}
+
+.navbar a:hover {
+  color: #3498db;
+}
+body {
+  padding-bottom: 70px;
+}
+.app {
+  max-width: 400px;
+  margin: auto;
+  position: relative;
+  min-height: auto;
+  padding-bottom: 60px; /* space for navbar */
+}
+.navbar {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  max-width: 360px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #fff;
+  display: flex;
+  justify-content: space-around;
+  padding: 10px;
+  border-top: 1px solid #ddd;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: #f2f4f7;
+  margin: 0;
+}
+
+.app {
+  max-width: 420px;
+  margin: auto;
+  padding: 15px;
+}
+
+/* TOP NAV */
+.topnav {
+  display: flex;
+  justify-content: space-between;
+  background: white;
+  padding: 10px;
+  border-radius: 12px;
+  margin-bottom: 15px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.topnav a {
+  text-decoration: none;
+  color: #555;
+  font-size: 13px;
+}
+
+.topnav a.active {
+  color: #3498db;
+  font-weight: bold;
+}
+
+/* SECTIONS */
+.section {
+  background: white;
+  padding: 15px;
+  border-radius: 12px;
+  margin-bottom: 15px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+}
+
+/* BUTTONS */
+button {
+  width: 100%;
+  padding: 10px;
+  margin-top: 8px;
+  border: none;
+  border-radius: 8px;
+  background: #3498db;
+  color: white;
+  font-size: 14px;
+}
+
+button.secondary {
+  background: #7f8c8d;
+}
+body {
+  font-family: Arial, sans-serif;
+  background: #f2f4f7;
+  margin: 0;
+}
+
+.app {
+  max-width: 360px;
+  margin: auto;
+  padding: 20px;
+  text-align: center;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 👈 3 per row */
+  gap: 8px; /* slightly smaller spacing */
+  margin-top: 10px;
+
+  align-content: start; /* 👈 FIXES bottom spacing */
+}
+.card {
+  background: white;
+  padding: 12px 6px;
+  border-radius: 12px;
+  text-decoration: none;
+  color: #333;
+  font-size: 12px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.08);
+
+  aspect-ratio: 1 / 1; /* 👈 keeps them square */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.card {
+  aspect-ratio: 1 / 1; /* 👈 makes cards square */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+@media (max-width: 350px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr); /* smaller phones */
+  }
+}
+.card:hover {
+  transform: scale(1.05);
+  background: #f0f8ff;
+}
+.active {
+  background: #2ecc71;
+  color: white;
+  font-weight: bold;
+  border-radius: 8px;
+  padding: 5px;
+}
+.prayer {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px solid #eee;
+}
+.prayer-quote {
+  margin: 10px 0;
+  font-style: italic;
+  color: #555;
+  text-align: center;
+}
+.menu-container {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+}
+
+.menu-icon {
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.menu {
+  display: none;
+  position: absolute;
+  right: 0;
+  background: white;
+  box-shadow: 0px 4px 8px rgba(0,0,0,0.2);
+  border-radius: 8px;
+  overflow: hidden;
+  min-width: 140px;
+  z-index: 100;
+}
+
+.menu a {
+  display: block;
+  padding: 10px;
+  text-decoration: none;
+  color: black;
+}
+
+.menu a:hover {
+  background: #f0f0f0;
+}
+/* MODAL BACKGROUND */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 200;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+}
+
+/* MODAL BOX */
+.modal-content {
+  background: white;
+  margin: 15% auto;
+  padding: 20px;
+  width: 80%;
+  border-radius: 10px;
+}
+
+/* CLOSE BUTTON */
+.close {
+  float: right;
+  font-size: 20px;
+  cursor: pointer;
+}
+/* DARK MODE */
+body.dark {
+  background: #121212;
+  color: white;
+}
+
+body.dark .card {
+  background: #1e1e1e;
+  color: white;
+}
+
+body.dark .modal-content {
+  background: #1e1e1e;
+  color: white;
+}
+
+.settings {
+  text-align: left;
+}
+
+.setting-group {
+  margin: 15px 0;
+}
+
+.setting-group h4 {
+  margin-bottom: 8px;
+  color: #555;
+}
+
+.setting-item {
+  display: flex;
+  justify-content: space-between;
+  margin: 8px 0;
+}
+
+.setting-link {
+  padding: 8px;
+  cursor: pointer;
+  color: #007bff;
+}
+
+.setting-link:hover {
+  text-decoration: underline;
+}
+.setting-title {
+  background: #eee;
+  padding: 10px;
+  margin-top: 10px;
+  cursor: pointer;
+  border-radius: 6px;
+}
+
+.setting-content {
+  display: none;
+  padding: 10px;
+  border-left: 3px solid #ccc;
+}
+
+.reminder-item {
+  display: flex;
+  justify-content: space-between;
+  margin: 8px 0;
+}
+.hero {
+  cursor: pointer;
+}
+
+.hero * {
+  pointer-events: none;
+}

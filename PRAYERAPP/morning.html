@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Morning Adhkar</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="app">
+<h2>🌅 Morning Adhkar Library</h2>
+
+<!-- Adhkar Selector -->
+<div class="section">
+  <h3>Select an Adhkar</h3>
+  <select id="adhkarSelect" onchange="showAdhkar()"></select>
+</div>
+
+<!-- Adhkar Display -->
+<div class="section" id="adhkarDisplay">
+  <div id="adhkarText" style="padding: 10px; line-height: 1.6; font-size: 16px;">
+    Select an Adhkar from above
+  </div>
+</div>
+
+</div>
+
+<script>
+const adhkarSelect = document.getElementById("adhkarSelect");
+const adhkarText = document.getElementById("adhkarText");
+
+// Morning Adhkar: [Title, Arabic, English]
+const morningAdhkar = [
+  ["Morning Entry", 
+   "أَصْبَحْنَا وَأَصْبَحَ الْمُلْكُ لِلَّهِ", 
+   "We have entered the morning and the entire dominion belongs to Allah."],
+
+  ["Declaration of Faith", 
+   "اللّهُمَّ أَنْتَ رَبِّي لا إِلَهَ إِلَّا أَنْتَ", 
+   "O Allah, You are my Lord, none has the right to be worshipped except You."],
+
+  ["Seeking Refuge", 
+   "اللّهُمَّ أَعُوذُ بِكَ مِنَ الْكُفْرِ وَالْفَقْر", 
+   "O Allah, I seek refuge in You from disbelief and poverty."],
+
+  ["Testifying in the Morning", 
+   "اللّهُمَّ إِنِّي أَصْبَحْتُ أُشْهِدُكَ وَأُشْهِدُ حَمَلَةَ عَرْشِكَ", 
+   "O Allah, I enter the morning testifying You and the bearers of Your Throne."],
+
+  ["Glorifying Allah", 
+   "سُبْحَانَ اللهِ وَالْحَمْدُ لِلَّهِ وَلَا إِلَهَ إِلَّا اللَّهُ وَاللّهُ أَكْبَرُ", 
+   "Glory be to Allah, all praise is for Allah, there is no god but Allah, and Allah is the Greatest."],
+
+  ["Blessed Morning", 
+   "اللّهُمَّ اجعل صباحي هذا مباركًا", 
+   "O Allah, make this morning blessed."],
+
+  ["Protection from Evil", 
+   "رَبِّ أَعُوذُ بِكَ مِنْ شَرِّ نَفْسِي وَمِنْ شَرِّ كُلِّ دَابَّةٍ", 
+   "My Lord, I seek refuge in You from the evil of my soul and the evil of every creature."],
+
+  ["Gratitude and Contentment", 
+   "اللّهُمَّ اجعل قلوبنا شاكرةً ونفوسنا راضيةً", 
+   "O Allah, make our hearts grateful and our souls content."]
+];
+
+// Populate dropdown
+morningAdhkar.forEach((a, i) => {
+  const option = document.createElement("option");
+  option.value = i;
+  option.textContent = a[0]; // show title in dropdown
+  adhkarSelect.appendChild(option);
+});
+
+// Show selected Adhkar below
+window.showAdhkar = function() {
+  const index = adhkarSelect.value || 0;
+  const a = morningAdhkar[index];
+  adhkarText.innerHTML = `
+    <b>Arabic:</b><br>${a[1]}<br><br>
+    <b>English:</b><br>${a[2]}
+  `;
+}
+</script>
+
+</body>
+</html>

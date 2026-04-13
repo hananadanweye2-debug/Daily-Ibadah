@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Deen Companion</title>
+<link rel="stylesheet" href="style.css">
+<style>
+  body { margin: 0; font-family: Arial; }
+  .menu-container { position: fixed; top: 10px; right: 10px; z-index: 1000; }
+  .menu-icon { font-size: 24px; cursor: pointer; }
+  .menu { display: none; position: absolute; right: 0; top: 30px; background: white; border: 1px solid #ccc; border-radius: 5px; min-width: 150px; box-shadow: 0 2px 8px rgba(0,0,0,0.2); }
+  .menu a { display: block; padding: 10px; text-decoration: none; color: black; border-bottom: 1px solid #eee; }
+  .menu a:last-child { border-bottom: none; }
+  .menu a:hover { background: #f0f0f0; }
+  .app { padding: 20px; margin-top: 50px; }
+  .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; }
+  .card { display: flex; justify-content: center; align-items: center; text-align: center; padding: 20px; background: #f9f9f9; border-radius: 8px; text-decoration: none; color: black; font-size: 18px; }
+</style>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#00796b">
+
+</head>
+<body>
+
+<div class="menu-container">
+  <div class="menu-icon" onclick="toggleMenu()">⋮</div>
+  <div id="dropdownMenu" class="menu">
+    <a href="#" onclick="openSettings()">Settings</a>
+    <a href="#" onclick="shareApp()">Share</a>
+    <a href="https://yourwebsite.com" target="_blank">Website</a>
+    <a href="#" onclick="rateApp()">Rate</a>
+    <a href="about.html">About</a>
+    <a href="help.html">Help</a>
+  </div>
+</div>
+
+<div class="app" id="appContent">
+  <h2>🕌 Deen Companion</h2>
+   <p class="signature">H.WEYE</p>
+  <div class="grid">
+    <a href="prayer.html" class="card">🕋<br>Prayer Times</a>
+    <a href="duas.html" class="card">🤲<br>Duas</a>
+    <a href="morning.html" class="card">🌅<br>Morning Adhkar</a>
+    <a href="evening.html" class="card">🌙<br>Evening Adhkar</a>
+    <a href="sleep.html" class="card">😴<br>Before Sleep</a>
+    <a href="rabbana.html" class="card">📖<br>Rabbana Duas</a>
+    <a href="hajj.html" class="card">🕋<br>Hajj & Umrah</a>
+    <a href="tasbeeh2.html" class="card">🔢<br>Tasbeeh</a>
+  </div>
+</div>
+<!-- SETTINGS PAGE -->
+<div id="settingsPage" style="display:none; padding:20px;">
+  <h2>⚙️ Settings</h2>
+
+ <div class="container">
+
+  <!-- Dark/Light Theme -->
+  <div class="setting" onclick="toggleSection('themeSection')">
+    <h3>🌙 Dark / Light Mode</h3>
+  </div>
+  <div id="themeSection" class="setting-content">
+    <button onclick="setTheme('light')">Light Mode</button>
+    <button onclick="setTheme('dark')">Dark Mode</button> 
+  </div>
+
+  <!-- Reminders -->
+  <div class="setting" onclick="toggleSection('reminderSection')">
+    <h3>🔔 Reminders</h3>
+  </div>
+  <div id="reminderSection" class="setting-content">
+    <div class="toggle-switch">
+      <span>Morning Adhkar</span>
+      <input type="checkbox" id="morningToggle">
+    </div>
+    <div class="toggle-switch">
+      <span>Evening Adhkar</span>
+      <input type="checkbox" id="eveningToggle">
+    </div>
+    <div class="toggle-switch">
+      <span>Sleep Duas</span>
+      <input type="checkbox" id="sleepToggle">
+    </div>
+  </div>
+
+  <!-- Fonts -->
+  <div class="setting" onclick="toggleSection('fontSection')">
+    <h3>🔤 Fonts</h3>
+  </div>
+  <div id="fontSection" class="setting-content">
+    <label>Font Size</label>
+    <input type="range" id="fontSlider" min="14" max="24">
+    <label>Font Style</label>
+    <select id="fontStyle">
+      <option value="Arial">Arial</option>
+      <option value="Tahoma">Tahoma</option>
+      <option value="Georgia">Georgia</option>
+      <option value="Verdana">Verdana</option>
+    </select>
+  </div>
+
+  <!-- Display -->
+  <div class="setting" onclick="toggleSection('displaySection')">
+    <h3>📱 Display Settings</h3>
+  </div>
+  <div id="displaySection" class="setting-content">
+    <button onclick="showOldDuas()">Show Old Duas</button>
+  </div>
+
+  <!-- Contact -->
+  <div class="setting" onclick="toggleSection('contactSection')">
+    <h3>📩 Contact / Report Issue</h3>
+  </div>
+  <div id="contactSection" class="setting-content">
+    <input type="text" id="name" placeholder="Your Name">
+    <input type="email" id="email" placeholder="Your Email">
+    <textarea id="issueDescription" placeholder="Describe issue"></textarea>
+    <button onclick="submitIssue()">Submit</button>
+  </div>
+
+</div>
+
+  <button onclick="goBack()">⬅ Back</button>
+</div>
+
+<script>
+function toggleMenu() {
+  const menu = document.getElementById("dropdownMenu");
+  menu.style.display = (menu.style.display === "block") ? "none" : "block";
+}
+
+window.onclick = function(e) {
+  if (!e.target.matches('.menu-icon')) {
+    document.getElementById("dropdownMenu").style.display = "none";
+  }
+}
+
+function shareApp() {
+  const url = 'https://hananadanweye2-debug.github.io/deen-companion-App/';
+
+  if (navigator.share) {
+    navigator.share({
+      title: 'Deen Companion',
+      text: 'Check out this Islamic app 🕌',
+      url: url
+    })
+    .then(() => console.log('Shared successfully'))
+    .catch((error) => console.log('Error sharing:', error));
+  } else {
+    // Better fallback
+    copyLinkFallback(url);
+  }
+}
+function copyLinkFallback(url) {
+  const tempInput = document.createElement("input");
+  tempInput.value = url;
+  document.body.appendChild(tempInput);
+  tempInput.select();
+  document.execCommand("copy");
+  document.body.removeChild(tempInput);
+
+  alert("Link copied! Share it with friends 👍");
+}
+function rateApp() {
+  alert("Redirecting to app store for rating (replace with your link).");
+  
+}
+function openSettings() {
+  document.getElementById("appContent").style.display = "none";
+  document.getElementById("settingsPage").style.display = "block";
+}
+
+function goBack() {
+  document.getElementById("appContent").style.display = "block";
+  document.getElementById("settingsPage").style.display = "none";
+}
+function toggleSection(id) {
+  const section = document.getElementById(id);
+  section.style.display = (section.style.display === "block") ? "none" : "block";
+}
+
+function setTheme(mode) {
+  if (mode === "dark") {
+    document.body.style.background = "#121212";
+    document.body.style.color = "white";
+  } else {
+    document.body.style.background = "white";
+    document.body.style.color = "black";
+  }
+}
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('service-worker.js')
+    .then(() => console.log('Service Worker registered'))
+    .catch(err => console.log('Service Worker failed', err));
+}
+let deferredPrompt;
+
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault();
+  deferredPrompt = e;
+
+  // Show install button
+  const installBtn = document.createElement("button");
+  installBtn.innerText = "Install App 📲";
+  document.body.appendChild(installBtn);
+
+  installBtn.onclick = () => {
+    deferredPrompt.prompt();
+    deferredPrompt.userChoice.then(() => {
+      deferredPrompt = null;
+    });
+  };
+});
+</script>
+
+</body>
+</html>

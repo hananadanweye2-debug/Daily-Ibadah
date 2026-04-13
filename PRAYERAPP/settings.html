@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Settings - Deen Companion</title>
+<link rel="stylesheet" href="style.css">
+<style>
+body { font-family: Arial, sans-serif; margin: 0; padding: 0; }
+header { padding: 15px 20px; background: #121212; color: white; text-align: center; }
+header h2 { margin: 0; }
+header p.signature { font-size: 14px; color: #ccc; margin-top: 5px; }
+.container { padding: 20px; max-width: 600px; margin: auto; }
+.setting { border-bottom: 1px solid #ddd; padding: 15px 0; cursor: pointer; }
+.setting h3 { margin: 0; font-size: 18px; display: inline-block; }
+.setting-content { display: none; padding-top: 10px; }
+button, select, input[type="range"], input[type="text"], input[type="email"], textarea {
+  padding: 5px; margin-top: 5px; width: 100%; box-sizing: border-box; border-radius: 5px; border: 1px solid #ccc;
+}
+textarea { resize: vertical; height: 80px; }
+.toggle-switch { display: flex; justify-content: space-between; align-items: center; margin-top: 10px; }
+</style>
+</head>
+
+<body>
+
+<header>
+  <h2>🕌 Deen Companion</h2>
+
+</header>
+
+<div class="container">
+
+  <!-- Dark/Light Theme -->
+  <div class="setting" onclick="toggleSection('themeSection')">
+    <h3>🌙 Dark / Light Mode</h3>
+  </div>
+  <div id="themeSection" class="setting-content">
+    <button onclick="setTheme('light')">Light Mode</button>
+    <button onclick="setTheme('dark')">Dark Mode</button>
+  </div>
+
+  <!-- Reminders -->
+  <div class="setting" onclick="toggleSection('reminderSection')">
+    <h3>🔔 Reminders</h3>
+  </div>
+  <div id="reminderSection" class="setting-content">
+    <div class="toggle-switch">
+      <span>Morning Adhkar</span>
+      <input type="checkbox" id="morningToggle">
+    </div>
+    <div class="toggle-switch">
+      <span>Evening Adhkar</span>
+      <input type="checkbox" id="eveningToggle">
+    </div>
+    <div class="toggle-switch">
+      <span>Sleep Duas</span>
+      <input type="checkbox" id="sleepToggle">
+    </div>
+  </div>
+
+  <!-- Fonts -->
+  <div class="setting" onclick="toggleSection('fontSection')">
+    <h3>🔤 Fonts</h3>
+  </div>
+  <div id="fontSection" class="setting-content">
+    <label>Font Size</label>
+    <input type="range" id="fontSlider" min="14" max="24">
+    <label>Font Style</label>
+    <select id="fontStyle">
+      <option value="Arial">Arial</option>
+      <option value="Tahoma">Tahoma</option>
+      <option value="Georgia">Georgia</option>
+      <option value="Verdana">Verdana</option>
+    </select>
+  </div>
+
+  <!-- Display -->
+  <div class="setting" onclick="toggleSection('displaySection')">
+    <h3>📱 Display Settings</h3>
+  </div>
+  <div id="displaySection" class="setting-content">
+    <button onclick="showOldDuas()">Show Old Duas</button>
+  </div>
+
+  <!-- Contact / Report Issue -->
+  <div class="setting" onclick="toggleSection('contactSection')">
+    <h3>📩 Contact / Report Issue</h3>
+  </div>
+  <div id="contactSection" class="setting-content">
+    <input type="text" id="name" placeholder="Your Name">
+    <input type="email" id="email" placeholder="Your Email">
+    <select id="issueType">
+      <option>Duas</option>
+      <option>40 Rabbana Duas</option>
+      <option>Hajj & Umrah</option>
+      <option>Other</option>
+    </select>
+    <input type="text" id="duaUrl" placeholder="Dua Number or URL">
+    <textarea id="issueDescription" placeholder="Please provide full details of mistakes or errors with good English"></textarea>
+    <button onclick="submitIssue()">Submit</button>
+  </div>
+
+</div>
+
+<script>
+// Toggle sections
+function toggleSection(id) {
+  const section = document.getElementById(id);
+  section.style.display = (section.style.display === "block") ? "none" : "block";
+}
+
+// Dark/Light theme
+function setTheme(mode) {
+  if (mode === "dark") {
+    document.body.style.background = "#121212";
+    document.body.style.color = "white";
+  } else {
+    document.body.style.background = "white";
+    document.body.style.color = "black";
+  }
+}
+
+// Font size
+document.getElementById("fontSlider").addEventListener("input", function() {
+  document.body.style.fontSize = this.value + "px";
+});
+
+// Font style
+document.getElementById("fontStyle").addEventListener("change", function() {
+  document.body.style.fontFamily = this.value;
+});
+
+// Show old duas
+function showOldDuas() {
+  alert("Old Duas feature coming soon");
+}
+
+// Report Issue
+function submitIssue() {
+  const name = document.getElementById("name").value;
+  const email = document.getElementById("email").value;
+  const issueType = document.getElementById("issueType").value;
+  const duaUrl = document.getElementById("duaUrl").value;
+  const description = document.getElementById("issueDescription").value;
+
+  if (!name || !email || !description) {
+    alert("Please fill all required fields!");
+    return;
+  }
+
+  alert(`Report submitted!\nName: ${name}\nEmail: ${email}\nType: ${issueType}\nDua URL/Number: ${duaUrl}\nDescription: ${description}`);
+}
+
+// Reminder toggles
+document.getElementById("morningToggle").addEventListener("change", function() {
+  alert(this.checked ? "Morning Adhkar ON" : "OFF");
+});
+document.getElementById("eveningToggle").addEventListener("change", function() {
+  alert(this.checked ? "Evening Adhkar ON" : "OFF");
+});
+document.getElementById("sleepToggle").addEventListener("change", function() {
+  alert(this.checked ? "Sleep Duas ON" : "OFF");
+});
+</script>
+
+</body>
+</html>
